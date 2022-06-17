@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Posts</h3>
+<p>
+    <a th:href="@{/posts/create}">
+        Add new post
+    </a>
+</p>
+<form action="#" th:action="@{/posts/search}" method="get">
+    <input type="text" placeholder="search" name="input">
+    <button>Search</button>
+</form>
+
+<a th:href="@{/posts/top4}"> Top 4 </a>
+
+<table id="customers">
+    <thead>
+    <tr>
+        <th>Content</th>
+        <th>CreateAt</th>
+        <th>Likes</th>
+        <th>Title</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.content}"></td>
+        <td th:text="${post.createAt}"></td>
+        <td th:text="${post.likes}"></td>
+        <td th:text="${post.title}"></td>
+        <td><a th:href="@{posts/{id}/edit(id=${post.getId()})}">edit</a></td>
+        <td><a th:href="@{posts/{id}/delete(id=${post.getId()})}">Delete</a></td>
+        <td><a th:href="@{posts/{id}/view(id=${post.getId()})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
